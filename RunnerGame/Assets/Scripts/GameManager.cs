@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Bilge;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject VarisNoktasý;
-    public int AnlikKarakterSayisi = 1;
+    public static int AnlikKarakterSayisi = 1;
 
     public List<GameObject> Karakterler;
+    public List<GameObject> OlusmaEfektleri;
+    public List<GameObject> YokOlmaEfektleri;
     void Start()
     {
         
@@ -16,154 +19,39 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-       /* if (Input.GetKeyDown(KeyCode.A))
-        {
-            foreach (var item in Karakterler)
-            {
-                if (!item.activeInHierarchy)
-                {
-                    item.transform.position = DogmaNoktasý.transform.position;
-                    item.SetActive(true);
-                    AnlikKarakterSayisi++;
-                    break;
-                }
-            }
-        }
-       */
     }
 
-    public void AdamYonetim(string veri, Transform Pozisyon)
+    public void AdamYonetim(string islemTuru,int gelenSayi, Transform Pozisyon)
     {
-        switch (veri)
+        switch (islemTuru)
         {
-            case "x2":
-                int sayi = 0;
-                foreach (var item in Karakterler)
-                {
-                    if(sayi < AnlikKarakterSayisi)
-                    {
-
-                        if (!item.activeInHierarchy)
-                        {
-                            item.transform.position = Pozisyon.position;
-                            item.SetActive(true);
-                            sayi++;
-                        }
-                    }
-                    else
-                    {
-                        sayi = 0;
-                        break;
-                    }
-                }
-                AnlikKarakterSayisi *= 2;
+            case "Carpma":
+                Matematiksel_islemler.Carpma(gelenSayi,OlusmaEfektleri,Karakterler,Pozisyon);
                 break;
-            case "+3":
-                int sayi2 = 0;
-                foreach (var item in Karakterler)
-                {
-                    if (sayi2 < 3)
-                    {
-
-                        if (!item.activeInHierarchy)
-                        {
-                            item.transform.position = Pozisyon.position;
-                            item.SetActive(true);
-                            sayi2++;
-                        }
-                    }
-                    else
-                    {
-                        sayi2 = 0;
-                        break;
-                    }
-                }
-                AnlikKarakterSayisi += 3;
+            case "Toplama":
+                Matematiksel_islemler.Toplama(gelenSayi, OlusmaEfektleri, Karakterler, Pozisyon);
                 break;
-            case "-4":
-                if (AnlikKarakterSayisi < 4)
-                {
-                    foreach (var item in Karakterler)
-                    {
-                        item.transform.position = Vector3.zero;
-                        item.SetActive(false);
-                    }
-                    AnlikKarakterSayisi = 1;
-                }
-                else
-                {
-                    int sayi3 = 0;
-                    foreach (var item in Karakterler)
-                    {
-                        if (sayi3 != 4)
-                        {
-                            if (item.activeInHierarchy)
-                            {
-                                item.transform.position = Vector3.zero;
-                                item.SetActive(false);
-                                sayi3++;
-                            }
-                        }
-                        else
-                        {
-                            sayi3 = 0;
-                            break;
-                        }
-                    }
-                    AnlikKarakterSayisi -= 4;
-                }
-
-
+            case "Cikartma":
+                Matematiksel_islemler.Cikartma(gelenSayi,YokOlmaEfektleri, Karakterler);
                 break;
-            case "/2":
-                if (AnlikKarakterSayisi <= 2)
-                {
-                    foreach (var item in Karakterler)
-                    {
-                        item.transform.position = Vector3.zero;
-                        item.SetActive(false);
-                    }
-                    AnlikKarakterSayisi = 1;
-                }
-                else
-                {
-                    int bolen = AnlikKarakterSayisi / 2;
-
-                    int sayi4 = 0;
-                    foreach (var item in Karakterler)
-                    {
-                        if (sayi4 != bolen)
-                        {
-                            if (item.activeInHierarchy)
-                            {
-                                item.transform.position = Vector3.zero;
-                                item.SetActive(false);
-                                sayi4++;
-                            }
-                        }
-                        else
-                        {
-                            sayi4 = 0;
-                            break;
-                        }
-                    }
-                    if(AnlikKarakterSayisi %2 == 0)
-                    {
-
-                        AnlikKarakterSayisi /= 2;
-                    }
-                    else
-                    {
-
-                        AnlikKarakterSayisi /= 2;
-                        AnlikKarakterSayisi++;
-                    }
-                }
-
-
+            case "Bolme":
+                Matematiksel_islemler.Bolme(gelenSayi, YokOlmaEfektleri, Karakterler);
                 break;
-            default:
+        }
+    }
+
+    public void YokOlmaEfektiOlustur(Vector3 Pozisyon)
+    {
+        foreach (var item in YokOlmaEfektleri)
+        {
+            if (!item.activeInHierarchy)
+            {
+                item.SetActive(true);
+                item.transform.position = Pozisyon;
+                item.GetComponent<ParticleSystem>().Play();
+                AnlikKarakterSayisi--;
                 break;
+            }
         }
     }
 }

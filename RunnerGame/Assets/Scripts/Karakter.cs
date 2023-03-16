@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Karakter : MonoBehaviour
 {
+    public GameManager _GameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,14 @@ public class Karakter : MonoBehaviour
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "x2" || other.name == "+3" || other.name == "-4" || other.name == "/2")
+        {
+            _GameManager.AdamYonetim(other.name,other.transform);
         }
     }
 }

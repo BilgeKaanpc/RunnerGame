@@ -5,12 +5,13 @@ using UnityEngine.AI;
 
 public class Alt_Karakter : MonoBehaviour
 {
+//Test
     GameObject Target;
     NavMeshAgent _Navmesh;
     void Start()
     {
         _Navmesh = GetComponent<NavMeshAgent>();
-        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().VarisNoktasý;
+        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().VarisNoktasÃ½;
     }
 
     private void LateUpdate()

@@ -5,7 +5,7 @@ using Bilge;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject VarisNoktasý;
+    public GameObject VarisNoktasi;
     public static int AnlikKarakterSayisi = 1;
 
     public List<GameObject> Karakterler;

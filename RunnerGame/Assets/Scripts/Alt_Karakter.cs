@@ -10,7 +10,7 @@ public class Alt_Karakter : MonoBehaviour
     void Start()
     {
         _Navmesh = GetComponent<NavMeshAgent>();
-        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().VarisNoktasý;
+        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().VarisNoktasi;
     }
 
     private void LateUpdate()

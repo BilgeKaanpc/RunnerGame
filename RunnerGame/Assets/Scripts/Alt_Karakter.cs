@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Alt_Karakter : MonoBehaviour
 {
-//Test
     GameObject Target;
     NavMeshAgent _Navmesh;
     void Start()

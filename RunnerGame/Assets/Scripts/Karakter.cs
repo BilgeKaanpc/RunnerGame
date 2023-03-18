@@ -5,6 +5,9 @@ using UnityEngine;
 public class Karakter : MonoBehaviour
 {
     public GameManager _GameManager;
+    public GameObject Kamera;
+    public bool SonaGeldikmi;
+    public GameObject GidecegiYer;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,20 +15,31 @@ public class Karakter : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * .5f * Time.deltaTime);
+        if (!SonaGeldikmi)
+        {
+
+            transform.Translate(Vector3.forward * .5f * Time.deltaTime);
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (SonaGeldikmi)
         {
-            if (Input.GetAxis("Mouse X") < 0)
+            transform.position = Vector3.Lerp(transform.position, GidecegiYer.transform.position, .01f);
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x-.1f,transform.position.y,transform.position.z),.3f);
-            }
-            if (Input.GetAxis("Mouse X") > 0)
-            {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                if (Input.GetAxis("Mouse X") < 0)
+                {
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
+                }
+                if (Input.GetAxis("Mouse X") > 0)
+                {
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                }
             }
         }
     }
@@ -36,6 +50,11 @@ public class Karakter : MonoBehaviour
         {
             int sayi = int.Parse(other.name);
             _GameManager.AdamYonetim(other.tag,sayi,other.transform);
+        }else if (other.CompareTag("Sontetikleyici"))
+        {
+            Kamera.GetComponent<Kamera>().SonaGeldikmi = true;
+            SonaGeldikmi = true;
+            _GameManager.GetComponent<GameManager>().DusmanlariTetikle();
         }
     }
 }

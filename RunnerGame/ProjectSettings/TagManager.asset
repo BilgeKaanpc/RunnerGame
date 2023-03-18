@@ -14,6 +14,8 @@ TagManager:
   - Pervaneigneler
   - AltKarakterler
   - Balyoz
+  - Dusman
+  - Sontetikleyici
   layers:
   - Default
   - TransparentFX

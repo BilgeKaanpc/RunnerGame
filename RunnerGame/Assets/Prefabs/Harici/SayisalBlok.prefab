@@ -540,9 +540,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4993967138524466828}
   - component: {fileID: 4993967138524466831}
+  - component: {fileID: 1751396001}
   m_Layer: 0
   m_Name: direk (1)
-  m_TagString: Untagged
+  m_TagString: Direk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -577,6 +578,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20958602, y: 1.2284362, z: 0.21451378}
   m_Center: {x: 0.008365095, y: 0.6760899, z: 0.000044822693}
+--- !u!54 &1751396001
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993967138524466829}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4993967138561923389
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +936,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4993967138856924345}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1126,9 +1143,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4993967139407935154}
   - component: {fileID: 4993967139407935165}
+  - component: {fileID: 811875707}
   m_Layer: 0
   m_Name: direk (2)
-  m_TagString: Untagged
+  m_TagString: Direk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1163,6 +1181,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20958602, y: 1.2284362, z: 0.21451378}
   m_Center: {x: 0.008365095, y: 0.6760899, z: 0.000044822693}
+--- !u!54 &811875707
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993967139407935155}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4993967139593110336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,9 +1342,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7375256906530313313}
   - component: {fileID: 7859341792297881306}
+  - component: {fileID: 1207193637}
   m_Layer: 0
   m_Name: direk
-  m_TagString: Untagged
+  m_TagString: Direk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,3 +1380,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20958602, y: 1.2284362, z: 0.21451378}
   m_Center: {x: 0.008365095, y: 0.6760899, z: 0.000044822693}
+--- !u!54 &1207193637
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859341792297881307}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

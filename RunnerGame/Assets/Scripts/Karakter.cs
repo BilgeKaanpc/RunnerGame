@@ -57,4 +57,21 @@ public class Karakter : MonoBehaviour
             _GameManager.GetComponent<GameManager>().DusmanlariTetikle();
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Direk")|| collision.gameObject.CompareTag("igneliKutu")|| collision.gameObject.CompareTag("Pervaneigneler"))
+        {
+            if (transform.position.x > 0)
+            {
+
+                transform.position = new Vector3(transform.position.x - .2f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x + .2f, transform.position.y, transform.position.z);
+            }
+            
+        
+        }
+    }
 }

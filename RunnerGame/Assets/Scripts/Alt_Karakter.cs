@@ -49,5 +49,11 @@ public class Alt_Karakter : MonoBehaviour
             _GameManager.YokOlmaEfektiOlustur(PozisyonVer(), false,false);
             gameObject.SetActive(false);
         }
+        else if (other.CompareTag("BosKarakter"))
+        {
+            _GameManager.Karakterler.Add(other.gameObject);
+            GameManager.AnlikKarakterSayisi++;
+            other.gameObject.tag = "AltKarakterler";
+        }
     }
 }

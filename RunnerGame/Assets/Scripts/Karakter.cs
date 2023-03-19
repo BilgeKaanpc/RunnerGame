@@ -50,11 +50,18 @@ public class Karakter : MonoBehaviour
         {
             int sayi = int.Parse(other.name);
             _GameManager.AdamYonetim(other.tag,sayi,other.transform);
-        }else if (other.CompareTag("Sontetikleyici"))
+        }
+        else if (other.CompareTag("Sontetikleyici"))
         {
             Kamera.SonaGeldikmi = true;
             SonaGeldikmi = true;
             _GameManager.GetComponent<GameManager>().DusmanlariTetikle();
+        }
+        else if (other.CompareTag("BosKarakter"))
+        {
+            _GameManager.Karakterler.Add(other.gameObject);
+            GameManager.AnlikKarakterSayisi++;
+            other.gameObject.tag = "AltKarakterler";
         }
     }
     private void OnCollisionEnter(Collision collision)

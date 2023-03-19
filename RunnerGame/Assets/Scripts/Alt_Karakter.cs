@@ -5,45 +5,48 @@ using UnityEngine.AI;
 
 public class Alt_Karakter : MonoBehaviour
 {
-    GameObject Target;
     NavMeshAgent _Navmesh;
+    public GameManager _GameManager;
+    public GameObject Target;
     void Start()
     {
         _Navmesh = GetComponent<NavMeshAgent>();
-    }
-    private void Awake()
-    {
-
-        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().VarisNoktasi;
     }
     private void LateUpdate()
     {
         _Navmesh.SetDestination(Target.transform.position);
     }
+
+    Vector3 PozisyonVer()
+    {
+        return new Vector3(transform.position.x, 0.23f, transform.position.z);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("igneliKutu"))
         {
-            Vector3 yeniPoz = new Vector3(transform.position.x, 0.23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().YokOlmaEfektiOlustur(yeniPoz);
+            _GameManager.YokOlmaEfektiOlustur(PozisyonVer());
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("Testere"))
+        else if (other.CompareTag("Testere"))
         {
-            Vector3 yeniPoz = new Vector3(transform.position.x, 0.23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().YokOlmaEfektiOlustur(yeniPoz);
+            _GameManager.YokOlmaEfektiOlustur(PozisyonVer());
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("Pervaneigneler"))
+        else if (other.CompareTag("Pervaneigneler"))
         {
-            Vector3 yeniPoz = new Vector3(transform.position.x, 0.23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().YokOlmaEfektiOlustur(yeniPoz);
+            _GameManager.YokOlmaEfektiOlustur(PozisyonVer());
             gameObject.SetActive(false);
         }
-        if (other.CompareTag("Balyoz"))
+        else if (other.CompareTag("Balyoz"))
         {
-            Vector3 yeniPoz = new Vector3(transform.position.x, 0.23f, transform.position.z);
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().YokOlmaEfektiOlustur(yeniPoz,true);
+            _GameManager.YokOlmaEfektiOlustur(PozisyonVer(), true);
+            gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Dusman"))
+        {
+            _GameManager.YokOlmaEfektiOlustur(PozisyonVer(), false,false);
             gameObject.SetActive(false);
         }
     }

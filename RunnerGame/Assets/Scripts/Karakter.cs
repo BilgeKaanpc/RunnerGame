@@ -5,7 +5,7 @@ using UnityEngine;
 public class Karakter : MonoBehaviour
 {
     public GameManager _GameManager;
-    public GameObject Kamera;
+    public Kamera Kamera;
     public bool SonaGeldikmi;
     public GameObject GidecegiYer;
     // Start is called before the first frame update
@@ -52,7 +52,7 @@ public class Karakter : MonoBehaviour
             _GameManager.AdamYonetim(other.tag,sayi,other.transform);
         }else if (other.CompareTag("Sontetikleyici"))
         {
-            Kamera.GetComponent<Kamera>().SonaGeldikmi = true;
+            Kamera.SonaGeldikmi = true;
             SonaGeldikmi = true;
             _GameManager.GetComponent<GameManager>().DusmanlariTetikle();
         }

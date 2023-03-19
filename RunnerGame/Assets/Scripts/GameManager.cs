@@ -5,7 +5,6 @@ using Bilge;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject VarisNoktasi;
     public static int AnlikKarakterSayisi = 1;
 
     public List<GameObject> Karakterler;
@@ -16,6 +15,9 @@ public class GameManager : MonoBehaviour
     [Header("Level Verileri")]
     public List<GameObject> Dusmanlar;
     public int KacDusmanOlsun;
+    public GameObject anaKarakter;
+    public bool OyunBittimi;
+    bool SonaGeldikmi;
     void Start()
     {
         DusmanlariOlustur();
@@ -23,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
     }
 
     public void DusmanlariOlustur()
@@ -43,6 +44,8 @@ public class GameManager : MonoBehaviour
                 item.GetComponent<Dusman>().AnimasyonTetikle();
             }
         }
+        SonaGeldikmi = true;
+        SavasDurumu();
     }
 
 
@@ -65,7 +68,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void YokOlmaEfektiOlustur(Vector3 Pozisyon,bool Balyoz = false)
+    void SavasDurumu()
+    {
+
+        if (SonaGeldikmi)
+        {
+
+            if (AnlikKarakterSayisi == 1 || KacDusmanOlsun == 0)
+            {
+                OyunBittimi = true;
+                foreach (var item in Dusmanlar)
+                {
+                    if (item.activeInHierarchy)
+                    {
+                        item.GetComponent<Animator>().SetBool("Saldir", false);
+                    }
+                }
+                foreach (var item in Karakterler)
+                {
+                    if (item.activeInHierarchy)
+                    {
+                        item.GetComponent<Animator>().SetBool("Saldir", false);
+                    }
+                }
+
+                anaKarakter.GetComponent<Animator>().SetBool("Saldir", false);
+
+                if (AnlikKarakterSayisi < KacDusmanOlsun || AnlikKarakterSayisi == KacDusmanOlsun)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+    }
+
+    public void YokOlmaEfektiOlustur(Vector3 Pozisyon,bool Balyoz = false,bool Durum = false)
     {
         foreach (var item in YokOlmaEfektleri)
         {
@@ -74,7 +116,18 @@ public class GameManager : MonoBehaviour
                 item.SetActive(true);
                 item.transform.position = Pozisyon;
                 item.GetComponent<ParticleSystem>().Play();
-                AnlikKarakterSayisi--;
+                if (!Durum)
+                {
+                    AnlikKarakterSayisi--;
+                }
+                else
+                {
+                    KacDusmanOlsun--;
+                }
+                if (!OyunBittimi)
+                {
+                    SavasDurumu();
+                }
                 break;
             }
             if (Balyoz)

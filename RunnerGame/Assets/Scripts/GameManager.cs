@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject anaKarakter;
     public bool OyunBittimi;
     bool SonaGeldikmi;
+    Matematiksel_islemler _Matematiksel_islemler = new Matematiksel_islemler();
+    BellekYonetim _BellekYonetim = new BellekYonetim();
     void Start()
     {
         DusmanlariOlustur();
@@ -54,16 +56,16 @@ public class GameManager : MonoBehaviour
         switch (islemTuru)
         {
             case "Carpma":
-                Matematiksel_islemler.Carpma(gelenSayi,OlusmaEfektleri,Karakterler,Pozisyon);
+                _Matematiksel_islemler.Carpma(gelenSayi,OlusmaEfektleri,Karakterler,Pozisyon);
                 break;
             case "Toplama":
-                Matematiksel_islemler.Toplama(gelenSayi, OlusmaEfektleri, Karakterler, Pozisyon);
+                _Matematiksel_islemler.Toplama(gelenSayi, OlusmaEfektleri, Karakterler, Pozisyon);
                 break;
             case "Cikartma":
-                Matematiksel_islemler.Cikartma(gelenSayi,YokOlmaEfektleri, Karakterler);
+                _Matematiksel_islemler.Cikartma(gelenSayi,YokOlmaEfektleri, Karakterler);
                 break;
             case "Bolme":
-                Matematiksel_islemler.Bolme(gelenSayi, YokOlmaEfektleri, Karakterler);
+                _Matematiksel_islemler.Bolme(gelenSayi, YokOlmaEfektleri, Karakterler);
                 break;
         }
     }

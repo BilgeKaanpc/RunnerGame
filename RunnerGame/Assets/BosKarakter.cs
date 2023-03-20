@@ -23,6 +23,7 @@ public class BosKarakter : MonoBehaviour
         {
             if (gameObject.CompareTag("BosKarakter"))
             {
+                _GameManager.Karakterler.Add(gameObject);
                 MaterialDegistirveAnimation();
                 Temasvar = true;
                 GetComponent<AudioSource>().Play();

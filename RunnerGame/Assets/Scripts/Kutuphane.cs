@@ -26,6 +26,7 @@ namespace Bilge
                                 efekt.SetActive(true);
                                 efekt.transform.position = Pozisyon.position;
                                 efekt.GetComponent<ParticleSystem>().Play();
+                                efekt.GetComponent<AudioSource>().Play();
                                 break;
                             }
                         }
@@ -59,6 +60,7 @@ namespace Bilge
                                 efekt.SetActive(true);
                                 efekt.transform.position = Pozisyon.position;
                                 efekt.GetComponent<ParticleSystem>().Play();
+                                efekt.GetComponent<AudioSource>().Play();
                                 break;
                             }
                         }
@@ -89,6 +91,7 @@ namespace Bilge
                             efekt.SetActive(true);
                             efekt.transform.position = yeniPoz;
                             efekt.GetComponent<ParticleSystem>().Play();
+                            efekt.GetComponent<AudioSource>().Play();
                             break;    
                         }
                     }
@@ -114,6 +117,7 @@ namespace Bilge
                                     efekt.SetActive(true);
                                     efekt.transform.position = yeniPoz;
                                     efekt.GetComponent<ParticleSystem>().Play();
+                                    efekt.GetComponent<AudioSource>().Play();
                                     break;
                                 }
                             }
@@ -147,6 +151,7 @@ namespace Bilge
                             efekt.SetActive(true);
                             efekt.transform.position = yeniPoz;
                             efekt.GetComponent<ParticleSystem>().Play();
+                            efekt.GetComponent<AudioSource>().Play();
                             break;
                         }
                     }
@@ -174,6 +179,7 @@ namespace Bilge
                                     efekt.SetActive(true);
                                     efekt.transform.position = yeniPoz;
                                     efekt.GetComponent<ParticleSystem>().Play();
+                                    efekt.GetComponent<AudioSource>().Play();
                                     break;
                                 }
                             }

@@ -21,8 +21,12 @@ public class BosKarakter : MonoBehaviour
     {
         if (other.CompareTag("AltKarakterler") || other.CompareTag("Player"))
         {
-            MaterialDegistirveAnimation();
-            Temasvar = true;
+            if (gameObject.CompareTag("BosKarakter"))
+            {
+                MaterialDegistirveAnimation();
+                Temasvar = true;
+                GetComponent<AudioSource>().Play();
+            }
         }
         else if (other.CompareTag("igneliKutu"))
         {
@@ -69,6 +73,8 @@ public class BosKarakter : MonoBehaviour
         mats[0] = AtanacakOlanMaterial;
         _Renderer.materials = mats;
         _Animator.SetBool("Saldir", true);
+        GameManager.AnlikKarakterSayisi++;
+        gameObject.tag = "AltKarakterler";
     }
 
 }

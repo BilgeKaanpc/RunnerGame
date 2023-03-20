@@ -52,8 +52,6 @@ public class Alt_Karakter : MonoBehaviour
         else if (other.CompareTag("BosKarakter"))
         {
             _GameManager.Karakterler.Add(other.gameObject);
-            GameManager.AnlikKarakterSayisi++;
-            other.gameObject.tag = "AltKarakterler";
         }
     }
 }

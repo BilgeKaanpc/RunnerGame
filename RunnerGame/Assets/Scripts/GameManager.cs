@@ -96,10 +96,11 @@ public class GameManager : MonoBehaviour
 
                 if (AnlikKarakterSayisi < KacDusmanOlsun || AnlikKarakterSayisi == KacDusmanOlsun)
                 {
-
+                    Debug.Log("Lose");
                 }
                 else
                 {
+                    Debug.Log("Win");
 
                 }
             }
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
                 item.SetActive(true);
                 item.transform.position = Pozisyon;
                 item.GetComponent<ParticleSystem>().Play();
+                item.GetComponent<AudioSource>().Play();
                 if (!Durum)
                 {
                     AnlikKarakterSayisi--;

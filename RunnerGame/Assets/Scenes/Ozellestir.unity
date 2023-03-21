@@ -1276,7 +1276,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 372713416}
         m_TargetAssemblyTypeName: Ozellestirme, Assembly-CSharp
-        m_MethodName: SapkaYonButton
+        m_MethodName: MaterialButton
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1586,6 +1586,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puanText: {fileID: 1000449745}
   HatText: {fileID: 159333199}
+  SopaText: {fileID: 90727217}
+  MaterialText: {fileID: 1410929248}
   Panels:
   - {fileID: 1230499762}
   - {fileID: 899260595}
@@ -1607,7 +1609,19 @@ MonoBehaviour:
   - {fileID: 919132148152868458}
   - {fileID: 919132149434034270}
   - {fileID: 919132148107182073}
-  Materials: []
+  SopaButtons:
+  - {fileID: 1940837620}
+  - {fileID: 1681038109}
+  Materials:
+  - {fileID: 2100000, guid: a9ad68d912f8c804f957c66d8bc1a363, type: 2}
+  - {fileID: 2100000, guid: 8e8d652bd3dd8b64197fac5b11ce2ef9, type: 2}
+  - {fileID: 2100000, guid: 5d17fe12bdb6de04baae88a0066c6dfa, type: 2}
+  - {fileID: 2100000, guid: b06d5b4ffe090ea44bc9ddd2c5e6a360, type: 2}
+  DefaultMaterial: {fileID: 2100000, guid: 1c6a1a7adaf94c44a83af9c4a87fbe8f, type: 2}
+  MaterialButtons:
+  - {fileID: 1478296218}
+  - {fileID: 321405771}
+  _Renderer: {fileID: 4378819787210929754}
   _ItemBilgileri: []
 --- !u!4 &372713417
 Transform:
@@ -3731,7 +3745,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 372713416}
         m_TargetAssemblyTypeName: Ozellestirme, Assembly-CSharp
-        m_MethodName: SapkaYonButton
+        m_MethodName: MaterialButton
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3864,7 +3878,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 372713416}
         m_TargetAssemblyTypeName: Ozellestirme, Assembly-CSharp
-        m_MethodName: SapkaYonButton
+        m_MethodName: SopaYonButton
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4445,7 +4459,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 372713416}
         m_TargetAssemblyTypeName: Ozellestirme, Assembly-CSharp
-        m_MethodName: SapkaYonButton
+        m_MethodName: SopaYonButton
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

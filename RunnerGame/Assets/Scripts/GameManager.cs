@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+                    _BellekYonetim.VeriKaydet_int("SonLevel",_BellekYonetim.VeriOku_int("SonLevel")+1);
                     Debug.Log("Win");
 
                 }

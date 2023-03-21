@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Bilge;
@@ -15,22 +16,30 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
 
-        _BellekYonetim.VeriKaydet_int("SonLevel", Level);
         int mevcutLevel = _BellekYonetim.VeriOku_int("SonLevel") - 4;
+        int index = 1;
         for(int i = 0; i < Buttons.Length; i++)
         {
             if(i + 1 <= mevcutLevel)
             {
                 Buttons[i].GetComponentInChildren<TMP_Text>().text = (i + 1).ToString();
-                int index = i + 1;
+                int SceneIndex = index + 4;
+                Buttons[i].onClick.AddListener(delegate { SahneYukle(SceneIndex); });
             }
             else
             {
                 Buttons[i].GetComponent<Image>().sprite = Lock;
+                Buttons[i].enabled = false;
             }
+            index++;
         }
     }
 
+    public void SahneYukle(int index)
+    {
+        SceneManager.LoadScene(index);
+        //SceneManager.LoadScene(int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text) + 4);
+    }
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);

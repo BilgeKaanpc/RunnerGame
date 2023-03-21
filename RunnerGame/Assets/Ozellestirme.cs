@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Bilge;
 using TMPro;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class Ozellestirme : MonoBehaviour
 {
@@ -20,6 +18,7 @@ public class Ozellestirme : MonoBehaviour
     public GameObject[] Materials;
     BellekYonetim _BellekYonetimi = new BellekYonetim();
     public List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
+    VeriYonetimi _veriYonetim = new VeriYonetimi();
 
     int SapkaIndex = -1;
 
@@ -41,32 +40,12 @@ public class Ozellestirme : MonoBehaviour
             SapkaIndex = _BellekYonetimi.VeriOku_int("AktifSapka");
             Hats[SapkaIndex].SetActive(true);
         }
-        Save();
-        Load();
+        _veriYonetim.Load();
+        _ItemBilgileri = _veriYonetim.ReturnList();
 
     }
 
-    public void Save()
-    {
-        _ItemBilgileri.Add(new ItemBilgileri());
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/ItemVerileri.gd");
-        bf.Serialize(file, _ItemBilgileri);
-        file.Close();
-
-    }
-
-    public void Load()
-    {
-        if (File.Exists((Application.persistentDataPath + "/ItemVerileri.gd")))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/ItemVerileri.gd",FileMode.Open);
-            _ItemBilgileri = (List<ItemBilgileri>)bf.Deserialize(file);
-            file.Close();
-            Debug.Log(_ItemBilgileri[1].ItemName);
-        }
-    }
+    
 
     public void SapkaYonButton(string islem)
     {
@@ -76,12 +55,14 @@ public class Ozellestirme : MonoBehaviour
             {
                 SapkaIndex = 0;
                 Hats[SapkaIndex].SetActive(true);
+                HatText.text = _ItemBilgileri[SapkaIndex].ItemName;
             }
             else
             {
                 Hats[SapkaIndex].SetActive(false);
                 SapkaIndex++;
                 Hats[SapkaIndex].SetActive(true);
+                HatText.text = _ItemBilgileri[SapkaIndex].ItemName;
             }
 
             if(SapkaIndex == Hats.Length - 1)
@@ -106,16 +87,19 @@ public class Ozellestirme : MonoBehaviour
                 {
                     Hats[SapkaIndex].SetActive(true);
                     SapkaButtons[0].interactable = true;
+                    HatText.text = _ItemBilgileri[SapkaIndex].ItemName;
                 }
                 else
                 {
                     SapkaButtons[0].interactable = false;
+                    HatText.text = "Sapka Yok";
                 }
 
             }
             else
             {
                 SapkaButtons[0].interactable = false;
+                HatText.text = "Sapka Yok";
             }
 
             if (SapkaIndex != Hats.Length - 1)

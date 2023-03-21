@@ -7,11 +7,15 @@ using Bilge;
 public class MenuManager : MonoBehaviour
 {
     BellekYonetim _BellekYonetim = new BellekYonetim();
+    VeriYonetimi _veriYonetim = new VeriYonetimi();
+    public List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
     public GameObject quitPanel;
     // Start is called before the first frame update
     void Start()
     {
         _BellekYonetim.ControlAndCreate();
+        //_veriYonetim.FileCreate(_ItemBilgileri);
+
     }
 
     public void LoadScene(int index)

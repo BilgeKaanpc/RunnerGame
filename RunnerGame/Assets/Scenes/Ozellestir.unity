@@ -532,22 +532,7 @@ MonoBehaviour:
   - {fileID: 919132149434034270}
   - {fileID: 919132148107182073}
   Materials: []
-  _ItemBilgileri:
-  - GroupIndex: 1
-    ItemIndex: 0
-    ItemName: Sapka 1
-    Point: 250
-    bought: 0
-  - GroupIndex: 1
-    ItemIndex: 1
-    ItemName: Sapka 2
-    Point: 480
-    bought: 0
-  - GroupIndex: 1
-    ItemIndex: 2
-    ItemName: Sapka 3
-    Point: 860
-    bought: 0
+  _ItemBilgileri: []
 --- !u!4 &372713417
 Transform:
   m_ObjectHideFlags: 0

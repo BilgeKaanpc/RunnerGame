@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: e2020b096ca36ae41bc0336bc172b159
+  - enabled: 1
+    path: Assets/Scenes/Ozellestir.unity
+    guid: ba58e19ff236ed64f9ac4acc47007f31
+  - enabled: 1
+    path: Assets/Scenes/LevelSec.unity
+    guid: 4415d0233dd237c4a8f81a3de9dbfe1d
+  - enabled: 1
+    path: Assets/Scenes/Market.unity
+    guid: 1dd523ca480815046a8877111aec9150
+  - enabled: 1
+    path: Assets/Scenes/Ayarlar.unity
+    guid: 881509ec8867cdb4bb1a12c49be68bb3
+  - enabled: 1
+    path: Assets/Scenes/LevelS/Level1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

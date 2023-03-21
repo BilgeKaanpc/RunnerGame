@@ -250,6 +250,15 @@ namespace Bilge
             return PlayerPrefs.GetFloat(Key);
         }
 
+        public void ControlAndCreate()
+        {
+            if (!PlayerPrefs.HasKey("SonLevel"))
+            {
+                PlayerPrefs.SetInt("SonLevel",5);
+                PlayerPrefs.SetInt("Puan", 100);
+            }
+        }
+
     }
 
 }

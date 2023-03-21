@@ -9,6 +9,10 @@ public class Ozellestirme : MonoBehaviour
 {
     public TMP_Text puanText;
     public TMP_Text HatText;
+    public GameObject[] Panels;
+    public GameObject islemCanvas;
+    public GameObject[] Objects;
+    int ActiveButtonIndex;
     [Header("Sapkalar")]
     public GameObject[] Hats;
     public Button[] SapkaButtons;
@@ -107,6 +111,22 @@ public class Ozellestirme : MonoBehaviour
                 SapkaButtons[1].interactable = true;
             }
         }
+    }
+
+    public void IslemPanelleri(int Index)
+    {
+        ActiveButtonIndex = Index;
+        Objects[2].SetActive(true);
+        Objects[3].SetActive(true);
+        Panels[Index].SetActive(true);
+        islemCanvas.SetActive(false);
+    }
+    public void Back()
+    {
+        Objects[2].SetActive(false);
+        Objects[3].SetActive(false);
+        islemCanvas.SetActive(true);
+        Panels[ActiveButtonIndex].SetActive(false);
     }
 
 }

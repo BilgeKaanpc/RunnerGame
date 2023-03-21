@@ -310,7 +310,6 @@ namespace Bilge
                 FileStream file = File.Open(Application.persistentDataPath + "/ItemVerileri.gd", FileMode.Open);
                 _ItemicListe = (List<ItemBilgileri>)bf.Deserialize(file);
                 file.Close();
-                Debug.Log(_ItemicListe[1].ItemName);
             }
         }
 

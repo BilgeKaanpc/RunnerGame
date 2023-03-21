@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Bilge
 {
@@ -259,6 +260,22 @@ namespace Bilge
             }
         }
 
+
+
+    }
+
+    public class Verilerimiz
+    {
+        public static List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
+    }
+    [Serializable]
+    public class ItemBilgileri
+    {
+        public int GroupIndex;
+        public int ItemIndex;
+        public string ItemName;
+        public int Point;
+        public bool bought;
     }
 
 }

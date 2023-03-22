@@ -18,6 +18,7 @@ TagManager:
   - Sontetikleyici
   - Direk
   - BosKarakter
+  - MenuMusic
   layers:
   - Default
   - TransparentFX

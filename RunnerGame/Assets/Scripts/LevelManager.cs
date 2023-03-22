@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     public int Level;
     BellekYonetim _BellekYonetim = new BellekYonetim();
     public Sprite Lock;
+
+    public AudioSource ButtonSound;
     void Start()
     {
 
@@ -37,11 +39,13 @@ public class LevelManager : MonoBehaviour
 
     public void SahneYukle(int index)
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(index);
         //SceneManager.LoadScene(int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text) + 4);
     }
     public void BackToMenu()
     {
+        ButtonSound.Play();
         SceneManager.LoadScene(0);
     }
 }

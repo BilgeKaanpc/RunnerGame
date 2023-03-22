@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Bilge;
 
 public class GameManager : MonoBehaviour
@@ -27,12 +28,18 @@ public class GameManager : MonoBehaviour
 
     public SkinnedMeshRenderer _Renderer;
     public Material DefaultTema;
+
+
+    Scene _Scene;
+    
     void Start()
     {
         DusmanlariOlustur();
+        _Scene = SceneManager.GetActiveScene();
     }
     private void Awake()
     {
+        Destroy(GameObject.FindWithTag("MenuMusic"));
         ItemControl();
     }
 
@@ -138,7 +145,12 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    _BellekYonetim.VeriKaydet_int("SonLevel",_BellekYonetim.VeriOku_int("SonLevel")+1);
+                    if(_Scene.buildIndex == _BellekYonetim.VeriOku_int("SonLevel"))
+                    {
+                        _BellekYonetim.VeriKaydet_int("SonLevel", _BellekYonetim.VeriOku_int("SonLevel") + 1);
+                    }
+
+
                     Debug.Log("Win");
 
                 }

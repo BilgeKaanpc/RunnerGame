@@ -34,6 +34,7 @@ public class Ozellestirme : MonoBehaviour
     public Button[] MaterialButtons;
     public SkinnedMeshRenderer _Renderer;
 
+    public AudioSource[] Sounds;
 
     BellekYonetim _BellekYonetimi = new BellekYonetim();
     public List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
@@ -158,75 +159,68 @@ public class Ozellestirme : MonoBehaviour
         }
 
     }
+
+    void SatinAlim(int Index)
+    {
+
+        _ItemBilgileri[Index].bought = true;
+        _BellekYonetimi.VeriKaydet_int("Puan", _BellekYonetimi.VeriOku_int("Puan") - _ItemBilgileri[Index].Point);
+        buyText.text = "Satýn Alýndý";
+        IslemButtonlari[0].interactable = false;
+        IslemButtonlari[1].interactable = true;
+        puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
+    }
+
     public void SatinAl()
     {
-        if(ActiveButtonIndex != -1)
-        {
-            switch (ActiveButtonIndex)
-            {
-                case 0:
-                    Debug.Log(ActiveButtonIndex + " " + SapkaIndex);
-                    _ItemBilgileri[SapkaIndex].bought = true;
-                    _BellekYonetimi.VeriKaydet_int("Puan", _BellekYonetimi.VeriOku_int("Puan") - _ItemBilgileri[SapkaIndex].Point);
-                    buyText.text = "Satýn Alýndý";
-                    IslemButtonlari[0].interactable = false;
-                    IslemButtonlari[1].interactable = true;
-                    puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
-                    break;
-                case 1:
-                    Debug.Log(ActiveButtonIndex + " " + SopaIndex);
-                    _ItemBilgileri[SopaIndex + 3].bought = true;
-                    _BellekYonetimi.VeriKaydet_int("Puan", _BellekYonetimi.VeriOku_int("Puan") - _ItemBilgileri[SopaIndex + 3].Point);
-                    buyText.text = "Satýn Alýndý";
-                    IslemButtonlari[0].interactable = false;
-                    IslemButtonlari[1].interactable = true;
-                    puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
-                    break;
-                case 2:
-                    Debug.Log(ActiveButtonIndex + " " + MaterialIndex);
-                    _ItemBilgileri[MaterialIndex + 6].bought = true;
-                    _BellekYonetimi.VeriKaydet_int("Puan", _BellekYonetimi.VeriOku_int("Puan") - _ItemBilgileri[MaterialIndex + 6].Point);
-                    buyText.text = "Satýn Alýndý";
-                    IslemButtonlari[0].interactable = false;
-                    IslemButtonlari[1].interactable = true;
-                    puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-    }
-    public void Kaydet()
-    {
+        Sounds[1].Play();
         if (ActiveButtonIndex != -1)
         {
             switch (ActiveButtonIndex)
             {
                 case 0:
-                    _BellekYonetimi.VeriKaydet_int("AktifSapka", SapkaIndex);
-                    IslemButtonlari[1].interactable = false;
-                    if (!saveAnim.GetBool("ok"))
-                    {
-                        saveAnim.SetBool("ok", true);
-                    }
+                    SatinAlim(SapkaIndex);
                     break;
                 case 1:
-                    _BellekYonetimi.VeriKaydet_int("AktifSopa", SopaIndex);
-                    IslemButtonlari[1].interactable = false;
-                    if (!saveAnim.GetBool("ok"))
-                    {
-                        saveAnim.SetBool("ok", true);
-                    }
+                    int Index = SopaIndex + 3;
+                    SatinAlim(Index);
                     break;
                 case 2:
-                    _BellekYonetimi.VeriKaydet_int("AktifTema", MaterialIndex);
-                    IslemButtonlari[1].interactable = false;
-                    if (!saveAnim.GetBool("ok"))
-                    {
-                        saveAnim.SetBool("ok", true);
-                    }
+                    int Index2 = MaterialIndex + 6;
+                    SatinAlim(Index2);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    void KaydetIslem(string Key, int Index)
+    {
+
+        _BellekYonetimi.VeriKaydet_int(Key, Index);
+        IslemButtonlari[1].interactable = false;
+        if (!saveAnim.GetBool("ok"))
+        {
+            saveAnim.SetBool("ok", true);
+        }
+    }
+
+    public void Kaydet()
+    {
+        Sounds[2].Play();
+        if (ActiveButtonIndex != -1)
+        {
+            switch (ActiveButtonIndex)
+            {
+                case 0:
+                    KaydetIslem("AktifSapka", SapkaIndex);
+                    break;
+                case 1:
+                    KaydetIslem("AktifSopa", SopaIndex);
+                    break;
+                case 2:
+                    KaydetIslem("AktifTema", MaterialIndex);
                     break;
                 default:
                     break;
@@ -236,6 +230,7 @@ public class Ozellestirme : MonoBehaviour
 
     public void SapkaYonButton(string islem)
     {
+        Sounds[0].Play();
         if (islem == "ileri")
         {
             if (SapkaIndex == -1)
@@ -359,6 +354,7 @@ public class Ozellestirme : MonoBehaviour
 
     public void SopaYonButton(string islem)
     {
+        Sounds[0].Play();
         if (islem == "ileri")
         {
             if (SopaIndex == -1)
@@ -482,6 +478,7 @@ public class Ozellestirme : MonoBehaviour
 
     public void MaterialButton(string islem)
     {
+        Sounds[0].Play();
         if (islem == "ileri")
         {
             if (MaterialIndex == -1)
@@ -619,6 +616,7 @@ public class Ozellestirme : MonoBehaviour
 
     public void IslemPanelleri(int Index)
     {
+        Sounds[0].Play();
         DurumKontrol(Index);
         ActiveButtonIndex = Index;
         GenelPaneller[0].SetActive(true);
@@ -628,6 +626,7 @@ public class Ozellestirme : MonoBehaviour
     }
     public void Back()
     {
+        Sounds[0].Play();
         GenelPaneller[0].SetActive(false);
         GenelPaneller[1].SetActive(false);
         islemCanvas.SetActive(true);
@@ -638,6 +637,7 @@ public class Ozellestirme : MonoBehaviour
 
     public void MainMenu()
     {
+        Sounds[0].Play();
         _veriYonetim.Save(_ItemBilgileri);
         SceneManager.LoadScene(0);
     }

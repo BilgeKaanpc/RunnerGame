@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     VeriYonetimi _veriYonetim = new VeriYonetimi();
     public List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
     public GameObject quitPanel;
+    public AudioSource buttonSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +21,18 @@ public class MenuManager : MonoBehaviour
 
     public void LoadScene(int index)
     {
+        buttonSound.Play();
         SceneManager.LoadScene(index);
     }
     public void Oyna()
     {
+        buttonSound.Play();
         SceneManager.LoadScene(_BellekYonetim.VeriOku_int("SonLevel"));
         
     }
     public void QuitButtonChoose(string durum)
     {
+        buttonSound.Play();
         if (durum == "Evet")
             Application.Quit();
         else if (durum == "cikis")

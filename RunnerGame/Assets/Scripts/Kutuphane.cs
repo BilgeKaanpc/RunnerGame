@@ -264,9 +264,6 @@ namespace Bilge
                 PlayerPrefs.SetInt("AktifTema", -1);
             }
         }
-
-
-
     }
 
     public class Verilerimiz

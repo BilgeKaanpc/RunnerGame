@@ -19,6 +19,8 @@ public class Ozellestirme : MonoBehaviour
     public TextMeshProUGUI buyText; 
     int ActiveButtonIndex;
 
+    public Animator saveAnim;
+
 
     [Header("Sapkalar")]
     public GameObject[] Hats;
@@ -43,15 +45,14 @@ public class Ozellestirme : MonoBehaviour
 
     void Start()
     {
-        _BellekYonetimi.VeriKaydet_int("AktifSapka",-1);
-        _BellekYonetimi.VeriKaydet_int("AktifSopa", -1);
-        _BellekYonetimi.VeriKaydet_int("AktifTema", -1);
-        _BellekYonetimi.VeriKaydet_int("Puan", 1250);
+       // _BellekYonetimi.VeriKaydet_int("Puan", 1250);
         puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
 
-        //_veriYonetim.Save(_ItemBilgileri);
         _veriYonetim.Load();
         _ItemBilgileri = _veriYonetim.ReturnList();
+        DurumKontrol(0,true);
+        DurumKontrol(1,true);
+        DurumKontrol(2,true);
 
     }
 
@@ -78,8 +79,17 @@ public class Ozellestirme : MonoBehaviour
             }
             else
             {
+                foreach (var item in Hats)
+                {
+                    item.SetActive(false);
+                }
                 SapkaIndex = _BellekYonetimi.VeriOku_int("AktifSapka");
                 Hats[SapkaIndex].SetActive(true);
+                HatText.text = _ItemBilgileri[SapkaIndex].ItemName;
+                buyText.text = "Satýn Alýndý";
+                IslemButtonlari[0].interactable = false;
+                IslemButtonlari[1].interactable = true;
+
             }
         }else if (Bolum == 1)
         {
@@ -100,8 +110,16 @@ public class Ozellestirme : MonoBehaviour
             }
             else
             {
+                foreach (var item in Weapons)
+                {
+                    item.SetActive(false);
+                }
                 SopaIndex = _BellekYonetimi.VeriOku_int("AktifSopa");
                 Weapons[SopaIndex].SetActive(true);
+                SopaText.text = _ItemBilgileri[SopaIndex +3].ItemName;
+                buyText.text = "Satýn Alýndý";
+                IslemButtonlari[0].interactable = false;
+                IslemButtonlari[1].interactable = true;
             }
 
         }
@@ -132,6 +150,10 @@ public class Ozellestirme : MonoBehaviour
                 Material[] mats = _Renderer.materials;
                 mats[0] = Materials[MaterialIndex];
                 _Renderer.materials = mats;
+                MaterialText.text = _ItemBilgileri[MaterialIndex+6].ItemName;
+                buyText.text = "Satýn Alýndý";
+                IslemButtonlari[0].interactable = false;
+                IslemButtonlari[1].interactable = true;
             }
         }
 
@@ -178,7 +200,38 @@ public class Ozellestirme : MonoBehaviour
     }
     public void Kaydet()
     {
-
+        if (ActiveButtonIndex != -1)
+        {
+            switch (ActiveButtonIndex)
+            {
+                case 0:
+                    _BellekYonetimi.VeriKaydet_int("AktifSapka", SapkaIndex);
+                    IslemButtonlari[1].interactable = false;
+                    if (!saveAnim.GetBool("ok"))
+                    {
+                        saveAnim.SetBool("ok", true);
+                    }
+                    break;
+                case 1:
+                    _BellekYonetimi.VeriKaydet_int("AktifSopa", SopaIndex);
+                    IslemButtonlari[1].interactable = false;
+                    if (!saveAnim.GetBool("ok"))
+                    {
+                        saveAnim.SetBool("ok", true);
+                    }
+                    break;
+                case 2:
+                    _BellekYonetimi.VeriKaydet_int("AktifTema", MaterialIndex);
+                    IslemButtonlari[1].interactable = false;
+                    if (!saveAnim.GetBool("ok"))
+                    {
+                        saveAnim.SetBool("ok", true);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void SapkaYonButton(string islem)

@@ -643,7 +643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0666d336464c1ef43839477109ba63be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2c6520a0fac9914a8c26a6d7d07653a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1609,8 +1609,8 @@ MonoBehaviour:
   - {fileID: 950482212}
   - {fileID: 730626162}
   IslemButtonlari:
-  - {fileID: 83128737}
-  - {fileID: 415759897}
+  - {fileID: 83128739}
+  - {fileID: 415759899}
   buyText: {fileID: 47349977}
   Hats:
   - {fileID: 919132149598728358}
@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0666d336464c1ef43839477109ba63be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2c6520a0fac9914a8c26a6d7d07653a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2081,7 +2081,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 540462018}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 372713416}
+        m_TargetAssemblyTypeName: Ozellestirme, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &540462018
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,9 @@ public class Ozellestirme : MonoBehaviour
     public TMP_Text MaterialText;
     public GameObject[] Panels;
     public GameObject islemCanvas;
-    public GameObject[] Objects;
+    public GameObject[] GenelPaneller;
+    public GameObject[] IslemButtonlari;
+    public TextMeshProUGUI buyText; 
     int ActiveButtonIndex;
 
 
@@ -43,6 +45,8 @@ public class Ozellestirme : MonoBehaviour
         _BellekYonetimi.VeriKaydet_int("AktifSapka",-1);
         _BellekYonetimi.VeriKaydet_int("AktifSopa", -1);
         _BellekYonetimi.VeriKaydet_int("AktifTema", -1);
+        _BellekYonetimi.VeriKaydet_int("Puan", 1500);
+        puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
 
         if (_BellekYonetimi.VeriOku_int("AktifSapka") == -1)
         {
@@ -95,7 +99,32 @@ public class Ozellestirme : MonoBehaviour
 
     }
 
+    public void SatinAl()
+    {
+        if(ActiveButtonIndex != -1)
+        {
+            switch (ActiveButtonIndex)
+            {
+                case 0:
+                    Debug.Log(ActiveButtonIndex + " " + SapkaIndex);
+                    break;
+                case 1:
+                    Debug.Log(ActiveButtonIndex + " " + SopaIndex);
+                    break;
+                case 2:
+                    Debug.Log(ActiveButtonIndex + " " + MaterialIndex);
+                    break;
+                default:
+                    break;
+            }
+        }
 
+
+    }
+    public void Kaydet()
+    {
+
+    }
 
     public void SapkaYonButton(string islem)
     {
@@ -298,17 +327,18 @@ public class Ozellestirme : MonoBehaviour
     public void IslemPanelleri(int Index)
     {
         ActiveButtonIndex = Index;
-        Objects[2].SetActive(true);
-        Objects[3].SetActive(true);
+        GenelPaneller[0].SetActive(true);
+        GenelPaneller[1].SetActive(true);
         Panels[Index].SetActive(true);
         islemCanvas.SetActive(false);
     }
     public void Back()
     {
-        Objects[2].SetActive(false);
-        Objects[3].SetActive(false);
+        GenelPaneller[0].SetActive(false);
+        GenelPaneller[1].SetActive(false);
         islemCanvas.SetActive(true);
         Panels[ActiveButtonIndex].SetActive(false);
+        ActiveButtonIndex = -1;
     }
 
 }

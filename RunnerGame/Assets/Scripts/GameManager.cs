@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> YokOlmaEfektleri;
     public List<GameObject> AdamLekesi;
 
+    public GameObject[] Sapkalar;
+    public GameObject[] Sopalar;
+    public Material[] Materials;
+
     [Header("Level Verileri")]
     public List<GameObject> Dusmanlar;
     public int KacDusmanOlsun;
@@ -20,13 +24,45 @@ public class GameManager : MonoBehaviour
     bool SonaGeldikmi;
     Matematiksel_islemler _Matematiksel_islemler = new Matematiksel_islemler();
     BellekYonetim _BellekYonetim = new BellekYonetim();
+
+    public SkinnedMeshRenderer _Renderer;
+    public Material DefaultTema;
     void Start()
     {
         DusmanlariOlustur();
     }
+    private void Awake()
+    {
+        ItemControl();
+    }
 
     void Update()
     {
+    }
+
+    public void ItemControl()
+    {
+
+        if (_BellekYonetim.VeriOku_int("AktifSapka") != -1)
+        {
+            Sapkalar[_BellekYonetim.VeriOku_int("AktifSapka")].SetActive(true);
+        }
+        if (_BellekYonetim.VeriOku_int("AktifSopa") != -1)
+        {
+            Sopalar[_BellekYonetim.VeriOku_int("AktifSopa")].SetActive(true);
+        }
+        if (_BellekYonetim.VeriOku_int("AktifTema") != -1)
+        {
+            Material[] mats = _Renderer.materials;
+            mats[0] = Materials[_BellekYonetim.VeriOku_int("AktifTema")];
+            _Renderer.materials = mats;
+        }
+        else
+        {
+            Material[] mats = _Renderer.materials;
+            mats[0] = DefaultTema;
+            _Renderer.materials = mats;
+        }
     }
 
     public void DusmanlariOlustur()

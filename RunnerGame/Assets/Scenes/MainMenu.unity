@@ -1307,6 +1307,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02270f48994b37418e4240a9145e8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ItemBilgileri:
+  - GroupIndex: 1
+    ItemIndex: 0
+    ItemName: Sapka 1
+    Point: 350
+    bought: 0
+  - GroupIndex: 1
+    ItemIndex: 1
+    ItemName: Sapka 2
+    Point: 480
+    bought: 0
+  - GroupIndex: 1
+    ItemIndex: 2
+    ItemName: Sapka 3
+    Point: 850
+    bought: 0
+  - GroupIndex: 2
+    ItemIndex: 0
+    ItemName: Sopa 1
+    Point: 300
+    bought: 0
+  - GroupIndex: 2
+    ItemIndex: 1
+    ItemName: Sopa 2
+    Point: 500
+    bought: 0
+  - GroupIndex: 2
+    ItemIndex: 2
+    ItemName: Sopa 3
+    Point: 850
+    bought: 0
+  - GroupIndex: 3
+    ItemIndex: 0
+    ItemName: Tema 1
+    Point: 150
+    bought: 0
+  - GroupIndex: 3
+    ItemIndex: 1
+    ItemName: Tema 2
+    Point: 300
+    bought: 0
+  - GroupIndex: 3
+    ItemIndex: 2
+    ItemName: Tema 3
+    Point: 450
+    bought: 0
+  - GroupIndex: 3
+    ItemIndex: 3
+    ItemName: Tema 4
+    Point: 600
+    bought: 0
   quitPanel: {fileID: 873736174}
 --- !u!4 &669446151
 Transform:

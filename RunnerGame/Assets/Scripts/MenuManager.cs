@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         _BellekYonetim.ControlAndCreate();
-        //_veriYonetim.FileCreate(_ItemBilgileri);
+        _veriYonetim.FileCreate(_ItemBilgileri);
 
     }
 

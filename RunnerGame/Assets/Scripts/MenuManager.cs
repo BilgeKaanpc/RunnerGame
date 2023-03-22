@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     {
         _BellekYonetim.ControlAndCreate();
         _veriYonetim.FileCreate(_ItemBilgileri);
+        buttonSound.volume = PlayerPrefs.GetFloat("MenuFx");
 
     }
 

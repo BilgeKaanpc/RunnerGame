@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
 
+        ButtonSound.volume = PlayerPrefs.GetFloat("MenuFx");
         int mevcutLevel = _BellekYonetim.VeriOku_int("SonLevel") - 4;
         int index = 1;
         for(int i = 0; i < Buttons.Length; i++)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Bilge;
 
@@ -31,6 +32,12 @@ public class GameManager : MonoBehaviour
 
 
     Scene _Scene;
+    public AudioSource[] sesler;
+
+    public GameObject[] islemPanelleri;
+
+    public AudioSource GameSound;
+    public Slider soundSlider;
     
     void Start()
     {
@@ -39,6 +46,9 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        sesler[0].volume = _BellekYonetim.VeriOku_float("OyunSes");
+        sesler[1].volume = _BellekYonetim.VeriOku_float("MenuFx");
+        soundSlider.value = _BellekYonetim.VeriOku_float("OyunSes");
         Destroy(GameObject.FindWithTag("MenuMusic"));
         ItemControl();
     }
@@ -197,5 +207,49 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CikisButton(string durum)
+    {
+        sesler[1].Play();
+        Time.timeScale = 0;
+        if(durum == "durdur")
+        {
+            islemPanelleri[0].SetActive(true);
+        }
+        else if (durum == "devamet")
+        {
+            islemPanelleri[0].SetActive(false);
+            Time.timeScale = 1;
+        }
+        else if (durum == "tekrar")
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(_Scene.buildIndex);
+        }
+        else if (durum == "menu")
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public void Ayarlar(string durum)
+    {
+        if(durum == "ayarla")
+        {
+            islemPanelleri[1].SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            islemPanelleri[1].SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+    public void SesAyarla()
+    {
+        _BellekYonetim.VeriKaydet_float("OyunSes", soundSlider.value);
+        sesler[0].volume = soundSlider.value;
     }
 }

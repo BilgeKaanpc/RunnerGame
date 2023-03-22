@@ -29,31 +29,35 @@ public class Karakter : MonoBehaviour
     void Update()
     {
 
-
-
-        if (SonaGeldikmi)
+        if (Time.timeScale != 0)
         {
-            transform.position = Vector3.Lerp(transform.position, GidecegiYer.transform.position, .01f);
-            if(_Slider.value != 0)
+
+            if (SonaGeldikmi)
             {
-                _Slider.value -= .01f;
+                transform.position = Vector3.Lerp(transform.position, GidecegiYer.transform.position, .01f);
+                if (_Slider.value != 0)
+                {
+                    _Slider.value -= .01f;
+                }
             }
-        }
-        else
-        {
-
-            float fark = Vector3.Distance(transform.position, GecisNoktasi.transform.position);
-            _Slider.value = fark;
-            if (Input.GetKey(KeyCode.Mouse0))
+            else
             {
-                if (Input.GetAxis("Mouse X") < 0)
+
+                float fark = Vector3.Distance(transform.position, GecisNoktasi.transform.position);
+                _Slider.value = fark;
+
+                if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
+                    if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
+                    }
+                    if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                    }
                 }
-                if (Input.GetAxis("Mouse X") > 0)
-                {
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
-                }
+
             }
         }
     }

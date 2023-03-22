@@ -9,7 +9,7 @@ public class MenuSounds : MonoBehaviour
     void Start()
     {
         sound = GetComponent<AudioSource>();
-        //sound.volume = PlayerPrefs.GetFloat("Menuses");
+        sound.volume = PlayerPrefs.GetFloat("MenuSes");
         DontDestroyOnLoad(gameObject);
         if(instance == null)
         {
@@ -19,5 +19,9 @@ public class MenuSounds : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void Update()
+    {
+        sound.volume = PlayerPrefs.GetFloat("MenuSes");
     }
 }

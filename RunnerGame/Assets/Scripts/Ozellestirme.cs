@@ -55,6 +55,12 @@ public class Ozellestirme : MonoBehaviour
         DurumKontrol(1,true);
         DurumKontrol(2,true);
 
+        foreach (var item in Sounds)
+        {
+            item.volume = PlayerPrefs.GetFloat("MenuFx");
+        }
+
+
     }
 
     void DurumKontrol(int Bolum, bool islem = false)

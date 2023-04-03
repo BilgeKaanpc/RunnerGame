@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
     public List<DilVerileriMain> DilVerileriMain = new List<DilVerileriMain>();
     List<DilVerileriMain> DilOkunanVeriler = new List<DilVerileriMain>();
     public TMP_Text TextObjects;
+    public TMP_Text loadText;
+    public GameObject loadPanel;
+    public Slider LoadSlider;
     void Start()
     {
 
@@ -50,17 +53,29 @@ public class LevelManager : MonoBehaviour
         if (_BellekYonetim.VeriOku_string("Dil") == "TR")
         {
             TextObjects.text = DilVerileriMain[0].DilVerileri_TR[0].metin;
+            loadText.text = DilVerileriMain[0].DilVerileri_TR[1].metin;
         }
         else
         {
             TextObjects.text = DilVerileriMain[0].DilVerileri_EN[0].metin;
+            loadText.text = DilVerileriMain[0].DilVerileri_EN[1].metin;
         }
     }
     public void SahneYukle(int index)
     {
         ButtonSound.Play();
-        SceneManager.LoadScene(index);
-        //SceneManager.LoadScene(int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text) + 4);
+        StartCoroutine(LoadAsync(index));
+    }
+    IEnumerator LoadAsync(int level)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
+        loadPanel.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            LoadSlider.value = progress;
+            yield return null;
+        }
     }
     public void BackToMenu()
     {

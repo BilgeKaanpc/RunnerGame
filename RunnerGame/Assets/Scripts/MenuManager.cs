@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Bilge;
@@ -16,6 +17,8 @@ public class MenuManager : MonoBehaviour
     public List<DilVerileriMain> DilVerileriMain = new List<DilVerileriMain>();
     List<DilVerileriMain> DilOkunanVeriler = new List<DilVerileriMain>();
     public TMP_Text[] TextObjects;
+    public GameObject loadPanel;
+    public Slider LoadSlider;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,8 +59,20 @@ public class MenuManager : MonoBehaviour
     public void Oyna()
     {
         buttonSound.Play();
-        SceneManager.LoadScene(_BellekYonetim.VeriOku_int("SonLevel"));
+        StartCoroutine(LoadAsync(_BellekYonetim.VeriOku_int("SonLevel")));
         
+    }
+
+    IEnumerator LoadAsync(int level)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
+        loadPanel.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            LoadSlider.value = progress;
+            yield return null;
+        }
     }
     public void QuitButtonChoose(string durum)
     {

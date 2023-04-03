@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Bilge;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     Matematiksel_islemler _Matematiksel_islemler = new Matematiksel_islemler();
     BellekYonetim _BellekYonetim = new BellekYonetim();
 
+    VeriYonetimi _veriYonetim = new VeriYonetimi();
     public SkinnedMeshRenderer _Renderer;
     public Material DefaultTema;
 
@@ -38,7 +40,12 @@ public class GameManager : MonoBehaviour
 
     public AudioSource GameSound;
     public Slider soundSlider;
-    
+
+    public List<DilVerileriMain> DilVerileriMain = new List<DilVerileriMain>();
+    List<DilVerileriMain> DilOkunanVeriler = new List<DilVerileriMain>();
+    public TMP_Text[] TextObjects;
+    public GameObject loadPanel;
+    public Slider LoadSlider;
     void Start()
     {
         DusmanlariOlustur();
@@ -46,11 +53,33 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        _veriYonetim.Dil_Load();
+        DilOkunanVeriler = _veriYonetim.ReturnDilList();
+        DilVerileriMain.Add(DilOkunanVeriler[5]);
+        LanguageControl();
         sesler[0].volume = _BellekYonetim.VeriOku_float("OyunSes");
         sesler[1].volume = _BellekYonetim.VeriOku_float("MenuFx");
         soundSlider.value = _BellekYonetim.VeriOku_float("OyunSes");
         Destroy(GameObject.FindWithTag("MenuMusic"));
         ItemControl();
+    }
+
+    void LanguageControl()
+    {
+        if (_BellekYonetim.VeriOku_string("Dil") == "TR")
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = DilVerileriMain[0].DilVerileri_TR[i].metin;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = DilVerileriMain[0].DilVerileri_EN[i].metin;
+            }
+        }
     }
 
     void Update()
@@ -151,16 +180,18 @@ public class GameManager : MonoBehaviour
 
                 if (AnlikKarakterSayisi < KacDusmanOlsun || AnlikKarakterSayisi == KacDusmanOlsun)
                 {
-                    Debug.Log("Lose");
+                    islemPanelleri[3].SetActive(true);
                 }
                 else
                 {
                     if(_Scene.buildIndex == _BellekYonetim.VeriOku_int("SonLevel"))
                     {
                         _BellekYonetim.VeriKaydet_int("SonLevel", _BellekYonetim.VeriOku_int("SonLevel") + 1);
+                        _BellekYonetim.VeriKaydet_int("Puan", _BellekYonetim.VeriOku_int("Puan") + 300);
                     }
 
 
+                    islemPanelleri[2].SetActive(true);
                     Debug.Log("Win");
 
                 }
@@ -251,5 +282,21 @@ public class GameManager : MonoBehaviour
     {
         _BellekYonetim.VeriKaydet_float("OyunSes", soundSlider.value);
         sesler[0].volume = soundSlider.value;
+    }
+
+    public void NextLevel()
+    {
+        StartCoroutine(LoadAsync(_Scene.buildIndex + 1));
+    }
+    IEnumerator LoadAsync(int level)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
+        loadPanel.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            LoadSlider.value = progress;
+            yield return null;
+        }
     }
 }

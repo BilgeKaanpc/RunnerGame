@@ -14,10 +14,18 @@ public class LevelManager : MonoBehaviour
     BellekYonetim _BellekYonetim = new BellekYonetim();
     public Sprite Lock;
 
+    VeriYonetimi _veriYonetim = new VeriYonetimi();
     public AudioSource ButtonSound;
+    public List<DilVerileriMain> DilVerileriMain = new List<DilVerileriMain>();
+    List<DilVerileriMain> DilOkunanVeriler = new List<DilVerileriMain>();
+    public TMP_Text TextObjects;
     void Start()
     {
 
+        _veriYonetim.Dil_Load();
+        DilOkunanVeriler = _veriYonetim.ReturnDilList();
+        DilVerileriMain.Add(DilOkunanVeriler[2]);
+        LanguageControl();
         ButtonSound.volume = PlayerPrefs.GetFloat("MenuFx");
         int mevcutLevel = _BellekYonetim.VeriOku_int("SonLevel") - 4;
         int index = 1;
@@ -37,7 +45,17 @@ public class LevelManager : MonoBehaviour
             index++;
         }
     }
-
+    void LanguageControl()
+    {
+        if (_BellekYonetim.VeriOku_string("Dil") == "TR")
+        {
+            TextObjects.text = DilVerileriMain[0].DilVerileri_TR[0].metin;
+        }
+        else
+        {
+            TextObjects.text = DilVerileriMain[0].DilVerileri_EN[0].metin;
+        }
+    }
     public void SahneYukle(int index)
     {
         ButtonSound.Play();

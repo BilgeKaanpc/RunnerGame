@@ -1614,7 +1614,6 @@ MonoBehaviour:
   IslemButtonlari:
   - {fileID: 83128739}
   - {fileID: 415759899}
-  buyText: {fileID: 47349977}
   saveAnim: {fileID: 1907114815}
   Hats:
   - {fileID: 919132149598728358}
@@ -1645,6 +1644,15 @@ MonoBehaviour:
   - {fileID: 372713420}
   - {fileID: 372713419}
   _ItemBilgileri: []
+  DilVerileriMain: []
+  TextObjects:
+  - {fileID: 1893275386}
+  - {fileID: 86768686}
+  - {fileID: 1704723860}
+  - {fileID: 280256889}
+  - {fileID: 159333199}
+  - {fileID: 47349977}
+  - {fileID: 32746389}
 --- !u!4 &372713417
 Transform:
   m_ObjectHideFlags: 0

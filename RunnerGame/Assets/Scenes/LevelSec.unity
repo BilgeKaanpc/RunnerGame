@@ -4861,6 +4861,8 @@ MonoBehaviour:
   Level: 10
   Lock: {fileID: 21300000, guid: 53e9b1d08918c5a429a90cdc11536a3f, type: 3}
   ButtonSound: {fileID: 1717509325}
+  DilVerileriMain: []
+  TextObjects: {fileID: 2040610369}
 --- !u!4 &1717509324
 Transform:
   m_ObjectHideFlags: 0

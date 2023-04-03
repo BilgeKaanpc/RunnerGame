@@ -1502,6 +1502,38 @@ MonoBehaviour:
     bought: 0
   quitPanel: {fileID: 873736174}
   buttonSound: {fileID: 669446152}
+  DilVerileriMain:
+  - BolumIndex: 0
+    DilVerileri_TR:
+    - metin: Oyna
+    - metin: "\xD6zellestir"
+    - metin: Level Sec
+    - metin: Market
+    - metin: Ayarlar
+    - metin: "\xC7ikis"
+    - metin: Emin Misiniz?
+    - metin: "Hay\u0131r"
+    - metin: Evet
+    DilVerileri_EN:
+    - metin: Play
+    - metin: Customize
+    - metin: Select Level
+    - metin: Shop
+    - metin: Settings
+    - metin: Quit
+    - metin: Are you sure?
+    - metin: No
+    - metin: Yes
+  TextObjects:
+  - {fileID: 336857625}
+  - {fileID: 837996115}
+  - {fileID: 457063449}
+  - {fileID: 1031931893}
+  - {fileID: 908092657}
+  - {fileID: 981848773}
+  - {fileID: 1525816193}
+  - {fileID: 494321812}
+  - {fileID: 318252094}
 --- !u!4 &669446151
 Transform:
   m_ObjectHideFlags: 0

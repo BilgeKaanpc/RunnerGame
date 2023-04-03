@@ -253,6 +253,7 @@ namespace Bilge
             return PlayerPrefs.GetFloat(Key);
         }
 
+        
         public void ControlAndCreate()
         {
             if (!PlayerPrefs.HasKey("SonLevel"))
@@ -265,6 +266,7 @@ namespace Bilge
                 PlayerPrefs.SetFloat("MenuSes", 1);
                 PlayerPrefs.SetFloat("MenuFx", 1);
                 PlayerPrefs.SetFloat("OyunSes", 1);
+                PlayerPrefs.SetString("Dil", "TR");
             }
         }
     }
@@ -321,4 +323,22 @@ namespace Bilge
             return _ItemicListe;
         }
     }
+
+    [Serializable]
+    public class DilVerileriMain
+    {
+        public int BolumIndex;
+        public List<DilVerileri_TR> DilVerileri_TR = new List<DilVerileri_TR>();
+        public List<DilVerileri_TR> DilVerileri_EN = new List<DilVerileri_TR>();
+
+
+    }
+
+
+    [Serializable]
+    public class DilVerileri_TR
+    {
+        public string metin;
+    }
+
 }

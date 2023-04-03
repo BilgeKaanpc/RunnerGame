@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using Bilge;
 
 public class MenuManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class MenuManager : MonoBehaviour
     public List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
     public GameObject quitPanel;
     public AudioSource buttonSound;
+    public List<DilVerileriMain> DilVerileriMain = new List<DilVerileriMain>();
+    public TMP_Text[] TextObjects;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,26 @@ public class MenuManager : MonoBehaviour
         _veriYonetim.FileCreate(_ItemBilgileri);
         buttonSound.volume = PlayerPrefs.GetFloat("MenuFx");
 
+        PlayerPrefs.SetString("Dil", "TR");
+        LanguageControl();
+    }
+
+    void LanguageControl()
+    {
+        if (_BellekYonetim.VeriOku_string("Dil") == "TR")
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = DilVerileriMain[0].DilVerileri_TR[i].metin;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = DilVerileriMain[0].DilVerileri_EN[i].metin;
+            }
+        }
     }
 
     public void LoadScene(int index)

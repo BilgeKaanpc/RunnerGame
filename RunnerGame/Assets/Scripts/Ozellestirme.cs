@@ -16,7 +16,6 @@ public class Ozellestirme : MonoBehaviour
     public GameObject islemCanvas;
     public GameObject[] GenelPaneller;
     public Button[] IslemButtonlari;
-    public TextMeshProUGUI buyText; 
     int ActiveButtonIndex;
 
     public Animator saveAnim;
@@ -38,11 +37,17 @@ public class Ozellestirme : MonoBehaviour
 
     BellekYonetim _BellekYonetimi = new BellekYonetim();
     public List<ItemBilgileri> _ItemBilgileri = new List<ItemBilgileri>();
+    public List<DilVerileriMain> DilVerileriMain = new List<DilVerileriMain>();
+    List<DilVerileriMain> DilOkunanVeriler = new List<DilVerileriMain>();
     VeriYonetimi _veriYonetim = new VeriYonetimi();
+    public TMP_Text[] TextObjects;
 
     int SapkaIndex = -1;
     int SopaIndex = -1;
     int MaterialIndex = -1;
+
+    string buyText;
+    string ItemText;
 
     void Start()
     {
@@ -60,9 +65,32 @@ public class Ozellestirme : MonoBehaviour
             item.volume = PlayerPrefs.GetFloat("MenuFx");
         }
 
-
+        _veriYonetim.Dil_Load();
+        DilOkunanVeriler = _veriYonetim.ReturnDilList();
+        DilVerileriMain.Add(DilOkunanVeriler[1]);
+        LanguageControl();
     }
-
+    void LanguageControl()
+    {
+        if (_BellekYonetimi.VeriOku_string("Dil") == "TR")
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = DilVerileriMain[0].DilVerileri_TR[i].metin;
+            }
+            buyText = DilVerileriMain[0].DilVerileri_TR[5].metin;
+            ItemText = DilVerileriMain[0].DilVerileri_TR[4].metin;
+        }
+        else
+        {
+            for (int i = 0; i < TextObjects.Length; i++)
+            {
+                TextObjects[i].text = DilVerileriMain[0].DilVerileri_EN[i].metin;
+            }
+            buyText = DilVerileriMain[0].DilVerileri_EN[5].metin;
+            ItemText = DilVerileriMain[0].DilVerileri_EN[4].metin;
+        }
+    }
     void DurumKontrol(int Bolum, bool islem = false)
     {
 
@@ -75,13 +103,13 @@ public class Ozellestirme : MonoBehaviour
                 {
                     item.SetActive(false);
                 }
-                buyText.text = "Satýn AL";
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
                 IslemButtonlari[1].interactable = false;
                 if (!islem)
                 {
                     SapkaIndex = -1;
-                    HatText.text = "Sapka Yok";
+                    HatText.text = ItemText;
                 }
             }
             else
@@ -93,7 +121,7 @@ public class Ozellestirme : MonoBehaviour
                 SapkaIndex = _BellekYonetimi.VeriOku_int("AktifSapka");
                 Hats[SapkaIndex].SetActive(true);
                 HatText.text = _ItemBilgileri[SapkaIndex].ItemName;
-                buyText.text = "Satýn Alýndý";
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
                 IslemButtonlari[1].interactable = true;
 
@@ -106,13 +134,13 @@ public class Ozellestirme : MonoBehaviour
                 {
                     item.SetActive(false);
                 }
-                buyText.text = "Satýn AL";
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
                 IslemButtonlari[1].interactable = false;
                 if (!islem)
                 {
                     SopaIndex = -1;
-                    SopaText.text = "Sopa Yok";
+                    SopaText.text = ItemText;
                 }
             }
             else
@@ -124,7 +152,7 @@ public class Ozellestirme : MonoBehaviour
                 SopaIndex = _BellekYonetimi.VeriOku_int("AktifSopa");
                 Weapons[SopaIndex].SetActive(true);
                 SopaText.text = _ItemBilgileri[SopaIndex +3].ItemName;
-                buyText.text = "Satýn Alýndý";
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
                 IslemButtonlari[1].interactable = true;
             }
@@ -135,11 +163,11 @@ public class Ozellestirme : MonoBehaviour
             if (_BellekYonetimi.VeriOku_int("AktifTema") == -1)
             {
 
-                buyText.text = "Satýn AL";
+                TextObjects[5].text = buyText;
                 if (!islem)
                 {
                     MaterialIndex = -1;
-                    MaterialText.text = "Tema Yok";
+                    MaterialText.text = ItemText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = false;
                 }
@@ -158,7 +186,7 @@ public class Ozellestirme : MonoBehaviour
                 mats[0] = Materials[MaterialIndex];
                 _Renderer.materials = mats;
                 MaterialText.text = _ItemBilgileri[MaterialIndex+6].ItemName;
-                buyText.text = "Satýn Alýndý";
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
                 IslemButtonlari[1].interactable = true;
             }
@@ -171,7 +199,7 @@ public class Ozellestirme : MonoBehaviour
 
         _ItemBilgileri[Index].bought = true;
         _BellekYonetimi.VeriKaydet_int("Puan", _BellekYonetimi.VeriOku_int("Puan") - _ItemBilgileri[Index].Point);
-        buyText.text = "Satýn Alýndý";
+        TextObjects[5].text = buyText;
         IslemButtonlari[0].interactable = false;
         IslemButtonlari[1].interactable = true;
         puanText.text = _BellekYonetimi.VeriOku_int("Puan").ToString();
@@ -247,7 +275,7 @@ public class Ozellestirme : MonoBehaviour
                 if (!_ItemBilgileri[SapkaIndex].bought)
                 {
                     IslemButtonlari[1].interactable = false;
-                    buyText.text = _ItemBilgileri[SapkaIndex].Point + " - Satýn Al";
+                    TextObjects[5].text = _ItemBilgileri[SapkaIndex].Point + " - " + buyText;
                     if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[SapkaIndex].Point)
                     {
                         IslemButtonlari[0].interactable = false;
@@ -259,7 +287,7 @@ public class Ozellestirme : MonoBehaviour
                 }
                 else
                 {
-                    buyText.text = "Satýn Alýndý";
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = true;
                 }
@@ -273,7 +301,7 @@ public class Ozellestirme : MonoBehaviour
                 if (!_ItemBilgileri[SapkaIndex].bought)
                 {
                     IslemButtonlari[1].interactable = false;
-                    buyText.text = _ItemBilgileri[SapkaIndex].Point + " - Satýn Al";
+                    TextObjects[5].text = _ItemBilgileri[SapkaIndex].Point + " - " + buyText;
                     if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[SapkaIndex].Point)
                     {
                         IslemButtonlari[0].interactable = false;
@@ -285,7 +313,7 @@ public class Ozellestirme : MonoBehaviour
                 }
                 else
                 {
-                    buyText.text = "Satýn Alýndý";
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = true;
                 }
@@ -317,7 +345,7 @@ public class Ozellestirme : MonoBehaviour
                     if (!_ItemBilgileri[SapkaIndex].bought)
                     {
                         IslemButtonlari[1].interactable = false;
-                        buyText.text = _ItemBilgileri[SapkaIndex].Point + " - Satýn Al";
+                        TextObjects[5].text = _ItemBilgileri[SapkaIndex].Point + " - " + buyText;
                         if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[SapkaIndex].Point)
                         {
                             IslemButtonlari[0].interactable = false;
@@ -329,7 +357,7 @@ public class Ozellestirme : MonoBehaviour
                     }
                     else
                     {
-                        buyText.text = "Satýn Alýndý";
+                        TextObjects[5].text = buyText;
                         IslemButtonlari[0].interactable = false;
                         IslemButtonlari[1].interactable = true;
                     }
@@ -337,8 +365,8 @@ public class Ozellestirme : MonoBehaviour
                 else
                 {
                     SapkaButtons[0].interactable = false;
-                    HatText.text = "Sapka Yok";
-                    buyText.text = "Satýn Alýndý";
+                    HatText.text = ItemText;
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false; 
                 }
 
@@ -346,8 +374,8 @@ public class Ozellestirme : MonoBehaviour
             else
             {
                 SapkaButtons[0].interactable = false;
-                HatText.text = "Sapka Yok";
-                buyText.text = "Satýn Alýndý";
+                HatText.text = ItemText;
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
             }
 
@@ -371,7 +399,7 @@ public class Ozellestirme : MonoBehaviour
                 if (!_ItemBilgileri[SopaIndex + 3].bought)
                 {
                     IslemButtonlari[1].interactable = false;
-                    buyText.text = _ItemBilgileri[SopaIndex + 3].Point + " - Satýn Al";
+                    TextObjects[5].text = _ItemBilgileri[SopaIndex + 3].Point + " - " + buyText;
                     if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[SopaIndex + 3].Point)
                     {
                         IslemButtonlari[0].interactable = false;
@@ -383,7 +411,7 @@ public class Ozellestirme : MonoBehaviour
                 }
                 else
                 {
-                    buyText.text = "Satýn Alýndý";
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = true;
                 }
@@ -397,7 +425,7 @@ public class Ozellestirme : MonoBehaviour
                 if (!_ItemBilgileri[SopaIndex + 3].bought)
                 {
                     IslemButtonlari[1].interactable = false;
-                    buyText.text = _ItemBilgileri[SopaIndex + 3].Point + " - Satýn Al";
+                    TextObjects[5].text = _ItemBilgileri[SopaIndex + 3].Point + " - " + buyText;
                     if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[SopaIndex + 3].Point)
                     {
                         IslemButtonlari[0].interactable = false;
@@ -409,7 +437,7 @@ public class Ozellestirme : MonoBehaviour
                 }
                 else
                 {
-                    buyText.text = "Satýn Alýndý";
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = true;
                 }
@@ -441,7 +469,7 @@ public class Ozellestirme : MonoBehaviour
                     if (!_ItemBilgileri[SopaIndex + 3].bought)
                     {
                         IslemButtonlari[1].interactable = false;
-                        buyText.text = _ItemBilgileri[SopaIndex + 3].Point + " - Satýn Al";
+                        TextObjects[5].text = _ItemBilgileri[SopaIndex + 3].Point + " - " + buyText;
                         if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[SopaIndex + 3].Point)
                         {
                             IslemButtonlari[0].interactable = false;
@@ -453,7 +481,7 @@ public class Ozellestirme : MonoBehaviour
                     }
                     else
                     {
-                        buyText.text = "Satýn Alýndý";
+                        TextObjects[5].text = buyText;
                         IslemButtonlari[0].interactable = false;
                         IslemButtonlari[1].interactable = true;
                     }
@@ -461,8 +489,8 @@ public class Ozellestirme : MonoBehaviour
                 else
                 {
                     SopaButtons[0].interactable = false;
-                    SopaText.text = "Sopa Yok";
-                    buyText.text = "Satýn Alýndý";
+                    SopaText.text = ItemText;
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                 }
 
@@ -470,8 +498,8 @@ public class Ozellestirme : MonoBehaviour
             else
             {
                 SopaButtons[0].interactable = false;
-                SopaText.text = "Sopa Yok";
-                buyText.text = "Satýn Alýndý";
+                SopaText.text = ItemText;
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
             }
 
@@ -497,7 +525,7 @@ public class Ozellestirme : MonoBehaviour
                 if (!_ItemBilgileri[MaterialIndex + 6].bought)
                 {
                     IslemButtonlari[1].interactable = false;
-                    buyText.text = _ItemBilgileri[MaterialIndex + 6].Point + " - Satýn Al";
+                    TextObjects[5].text = _ItemBilgileri[MaterialIndex + 6].Point + " - " + buyText;
                     if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[MaterialIndex + 6].Point)
                     {
                         IslemButtonlari[0].interactable = false;
@@ -509,7 +537,7 @@ public class Ozellestirme : MonoBehaviour
                 }
                 else
                 {
-                    buyText.text = "Satýn Alýndý";
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = true;
                 }
@@ -525,7 +553,7 @@ public class Ozellestirme : MonoBehaviour
                 if (!_ItemBilgileri[MaterialIndex + 6].bought)
                 {
                     IslemButtonlari[1].interactable = false;
-                    buyText.text = _ItemBilgileri[MaterialIndex + 6].Point + " - Satýn Al";
+                    TextObjects[5].text = _ItemBilgileri[MaterialIndex + 6].Point + " - "+buyText;
                     if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[MaterialIndex + 6].Point)
                     {
                         IslemButtonlari[0].interactable = false;
@@ -537,7 +565,7 @@ public class Ozellestirme : MonoBehaviour
                 }
                 else
                 {
-                    buyText.text = "Satýn Alýndý";
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                     IslemButtonlari[1].interactable = true;
                 }
@@ -571,7 +599,7 @@ public class Ozellestirme : MonoBehaviour
                     if (!_ItemBilgileri[MaterialIndex + 6].bought)
                     {
                         IslemButtonlari[1].interactable = false;
-                        buyText.text = _ItemBilgileri[MaterialIndex + 6].Point + " - Satýn Al";
+                        TextObjects[5].text = _ItemBilgileri[MaterialIndex + 6].Point + " - " + buyText;
                         if (_BellekYonetimi.VeriOku_int("Puan") < _ItemBilgileri[MaterialIndex + 6].Point)
                         {
                             IslemButtonlari[0].interactable = false;
@@ -583,7 +611,7 @@ public class Ozellestirme : MonoBehaviour
                     }
                     else
                     {
-                        buyText.text = "Satýn Alýndý";
+                        TextObjects[5].text = buyText;
                         IslemButtonlari[0].interactable = false;
                         IslemButtonlari[1].interactable = true;
                     }
@@ -594,8 +622,8 @@ public class Ozellestirme : MonoBehaviour
                     mats[0] = DefaultMaterial;
                     _Renderer.materials = mats;
                     MaterialButtons[0].interactable = false;
-                    MaterialText.text = "Tema Yok";
-                    buyText.text = "Satýn Alýndý";
+                    MaterialText.text = ItemText;
+                    TextObjects[5].text = buyText;
                     IslemButtonlari[0].interactable = false;
                 }
 
@@ -606,8 +634,8 @@ public class Ozellestirme : MonoBehaviour
                 mats[0] = DefaultMaterial;
                 _Renderer.materials = mats;
                 MaterialButtons[0].interactable = false;
-                MaterialText.text = "Tema Yok";
-                buyText.text = "Satýn Alýndý";
+                MaterialText.text = ItemText;
+                TextObjects[5].text = buyText;
                 IslemButtonlari[0].interactable = false;
             }
 

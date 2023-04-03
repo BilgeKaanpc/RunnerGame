@@ -1449,7 +1449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02270f48994b37418e4240a9145e8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ItemBilgileri:
+  _Varsayilan_ItemBilgileri:
   - GroupIndex: 1
     ItemIndex: 0
     ItemName: Sapka 1
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   - GroupIndex: 2
     ItemIndex: 2
     ItemName: Sopa 3
-    Point: 850
+    Point: 750
     bought: 0
   - GroupIndex: 3
     ItemIndex: 0
@@ -1500,11 +1500,8 @@ MonoBehaviour:
     ItemName: Tema 4
     Point: 600
     bought: 0
-  quitPanel: {fileID: 873736174}
-  buttonSound: {fileID: 669446152}
-  DilVerileriMain:
-  - BolumIndex: 0
-    DilVerileri_TR:
+  _Varsayilan_DilVerileri:
+  - DilVerileri_TR:
     - metin: Oyna
     - metin: "\xD6zellestir"
     - metin: Level Sec
@@ -1524,6 +1521,57 @@ MonoBehaviour:
     - metin: Are you sure?
     - metin: No
     - metin: Yes
+  - DilVerileri_TR:
+    - metin: Sapka
+    - metin: Sopa
+    - metin: Tema
+    - metin: "Geri D\xF6n"
+    - metin: Item Yok
+    - metin: "Sat\u0131n Al"
+    - metin: Kaydet
+    DilVerileri_EN:
+    - metin: Hat
+    - metin: Bat
+    - metin: Theme
+    - metin: Turn Back
+    - metin: No Item
+    - metin: Buy
+    - metin: Save
+  - DilVerileri_TR:
+    - metin: Level Sec
+    DilVerileri_EN:
+    - metin: Select Level
+  - DilVerileri_TR:
+    - metin: "Al\u0131\u015Fveri\u015F"
+    DilVerileri_EN:
+    - metin: Shopping
+  - DilVerileri_TR:
+    - metin: Ayarlar
+    - metin: Menu Sesi
+    - metin: Menu FX
+    - metin: Oyun Sesi
+    - metin: Dil
+    DilVerileri_EN:
+    - metin: Settings
+    - metin: Menu Sounds
+    - metin: Menu FX
+    - metin: Game Sound
+    - metin: Language
+  - DilVerileri_TR:
+    - metin: Ayarlar
+    - metin: Oyun Sesi
+    - metin: "Oyun Duraklat\u0131ld\u0131"
+    - metin: "Kazand\u0131n"
+    - metin: Kaybettin
+    DilVerileri_EN:
+    - metin: Settings
+    - metin: Game Sound
+    - metin: Game Paused
+    - metin: You Win
+    - metin: You Lose
+  quitPanel: {fileID: 873736174}
+  buttonSound: {fileID: 669446152}
+  DilVerileriMain: []
   TextObjects:
   - {fileID: 336857625}
   - {fileID: 837996115}

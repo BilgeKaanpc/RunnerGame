@@ -295,13 +295,20 @@ namespace Bilge
             file.Close();
 
         }
-        public void FileCreate(List<ItemBilgileri> _ItemBilgileri)
+        public void FileCreate(List<ItemBilgileri> _ItemBilgileri, List<DilVerileriMain> _DilVerileri)
         {
             if(!File.Exists(Application.persistentDataPath + "/ItemVerileri.gd"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Create(Application.persistentDataPath + "/ItemVerileri.gd");
                 bf.Serialize(file, _ItemBilgileri);
+                file.Close();
+            }
+            if (!File.Exists(Application.persistentDataPath + "/DilVerileri.gd"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/DilVerileri.gd");
+                bf.Serialize(file, _DilVerileri);
                 file.Close();
             }
 
@@ -322,12 +329,28 @@ namespace Bilge
         {
             return _ItemicListe;
         }
+        List<DilVerileriMain> _DilVerileriIcListe;
+        public void Dil_Load()
+        {
+            if (File.Exists((Application.persistentDataPath + "/DilVerileri.gd")))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/DilVerileri.gd", FileMode.Open);
+                _DilVerileriIcListe = (List<DilVerileriMain>)bf.Deserialize(file);
+                file.Close();
+            }
+        }
+        public List<DilVerileriMain> ReturnDilList()
+        {
+            return _DilVerileriIcListe;
+        }
+
+
     }
 
     [Serializable]
     public class DilVerileriMain
     {
-        public int BolumIndex;
         public List<DilVerileri_TR> DilVerileri_TR = new List<DilVerileri_TR>();
         public List<DilVerileri_TR> DilVerileri_EN = new List<DilVerileri_TR>();
 

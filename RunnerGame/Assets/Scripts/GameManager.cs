@@ -82,10 +82,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-    }
-
     public void ItemControl()
     {
 
@@ -131,7 +127,6 @@ public class GameManager : MonoBehaviour
         SonaGeldikmi = true;
         SavasDurumu();
     }
-
 
     public void AdamYonetim(string islemTuru,int gelenSayi, Transform Pozisyon)
     {

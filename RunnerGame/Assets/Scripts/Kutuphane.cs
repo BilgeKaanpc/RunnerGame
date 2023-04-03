@@ -239,7 +239,6 @@ namespace Bilge
             PlayerPrefs.SetFloat(Key, value);
             PlayerPrefs.Save();
         }
-
         public string VeriOku_string(string Key)
         {
             return PlayerPrefs.GetString(Key);
@@ -252,8 +251,6 @@ namespace Bilge
         {
             return PlayerPrefs.GetFloat(Key);
         }
-
-        
         public void ControlAndCreate()
         {
             if (!PlayerPrefs.HasKey("SonLevel"))

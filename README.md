@@ -3,7 +3,7 @@
 My mobile game project.
 
 
-([https://pasteboard.co/images/S6WsCFU8yggT.png/load](https://www.winniesoft.com/assets/img/runnerGame/runner1.PNG))
+[alt text]([https://pasteboard.co/images/S6WsCFU8yggT.png/load](https://www.winniesoft.com/assets/img/runnerGame/runner1.PNG))
 ![alt text]([https://pasteboard.co/images/S6WsCFU8yggT.png/load](https://www.winniesoft.com/assets/img/runnerGame/runner2.PNG))
 ![alt text]([https://pasteboard.co/images/S6WsCFU8yggT.png/load](https://www.winniesoft.com/assets/img/runnerGame/runner3.PNG))
 ![alt text]([https://pasteboard.co/images/S6WsCFU8yggT.png/load](https://www.winniesoft.com/assets/img/runnerGame/runner4.PNG))
